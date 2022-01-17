@@ -61,7 +61,13 @@ define(function (require, exports, module) {
       });
 
       minder.on('dblclick', function () {
-        if (minder.getSelectedNode() && minder._status !== 'readonly') {
+        const selectedNodes = minder.getSelectedNodes()
+        // 增加 editable字段，判断单个节点的编辑状态
+        const forbiddenNode = selectedNodes.find(node => typeof node.data.editable !== 'undefined' && node.data.editable === false)
+        // console.log('selectedNodes2', selectedNodes)
+        // console.log('forbiddenNode3', forbiddenNode)
+        // console.log('typeof forbiddenNode2', typeof forbiddenNode)
+        if (selectedNodes && minder._status !== 'readonly' && typeof forbiddenNode === 'undefined') {
           editText();
         }
       });

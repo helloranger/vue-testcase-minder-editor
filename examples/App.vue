@@ -28,8 +28,8 @@ export default {
           },
           children: [
             { data: { text: '新闻', id: '1', resource: ['自定义标签'] } },
-            { data: { text: '网页', id: '2', priority: 1 } },
-            { data: { text: '贴吧', id: '3', priority: 2 } },
+            { data: { text: '网页', id: '2', priority: 1 , editable: false} },
+            { data: { text: '贴吧', id: '3', priority: 2 , editable: true} },
             { data: { text: '知道', id: '4', priority: 2 } },
             { data: { text: '音乐', id: '5', priority: 3 } },
             { data: { text: '图片', id: '6', priority: 3 } },
@@ -52,6 +52,15 @@ export default {
     logCurrentData: function(event) {
       const caseJson = this.$refs.minderEditor.getJsonData();
       console.log('编辑器中的最新用例内容：', caseJson)
+
+
+      // 调试代码
+      const selectedNodes = this.$refs.minderEditor.minder.getSelectedNodes()
+      const forbiddenNode = selectedNodes.find(node => typeof node.data.editable !== 'undefined' && node.data.editable === false)
+      console.log('selectedNodes', selectedNodes)
+      console.log('forbiddenNode', forbiddenNode)
+
+
       const nodeDatas = {}
       this.checkJsonHasDuplicateId(caseJson.root, nodeDatas)
       let hasDuplicateId = false;

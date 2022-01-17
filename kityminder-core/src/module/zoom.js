@@ -160,7 +160,7 @@ define(function(require, exports, module) {
                 'zoom': ZoomCommand
             },
             events: {
-                'normal.mousewheel readonly.mousewheel': function(e) {
+                'normal.mousewheel .mousewheel': function(e) {
                     if (!e.originEvent.ctrlKey && !e.originEvent.metaKey) return;
 
                     var delta = e.originEvent.wheelDelta;
